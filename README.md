@@ -9,7 +9,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 - Please see the original papar about the datasets and pre-pocessing.
 ## 1.Requirements
 
-- Python 2.7.12 
+- Python2 or Python3
 - Mxnet 1.2.0
 ## 2.Results
 
