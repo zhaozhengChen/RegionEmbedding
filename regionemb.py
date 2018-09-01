@@ -127,8 +127,8 @@ def evaluate(data,batch_size):
     cnt = 0
     for epoch_percent, batch_slots in batch_iter(data,batch_size,shuffle=False):
         batch_sequence, batch_label = zip(*batch_slots)
-        batch_sequence = nd.array(batch_sequence,ctx)
         batch_label = nd.array(batch_label,ctx)
+        aligned_seq,trimed_seq,mask = batch_process(batch_sequence,ctx)
         output = net(aligned_seq,trimed_seq,mask)
         loss = SCE(output,batch_label)
         acc_test += accuracy(output,batch_label,batch_size)
