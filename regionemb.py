@@ -128,7 +128,7 @@ def evaluate(data,batch_size):
         batch_sequence, batch_label = zip(*batch_slots)
         batch_sequence = nd.array(batch_sequence,ctx)
         batch_label = nd.array(batch_label,ctx)
-        output = net(batch_sequence)
+        output = net(aligned_seq,trimed_seq,mask)
         loss = SCE(output,batch_label)
         acc_test += accuracy(output,batch_label,batch_size)
         test_loss += nd.mean(loss)
