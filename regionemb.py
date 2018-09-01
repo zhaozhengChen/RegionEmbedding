@@ -122,7 +122,6 @@ def batch_process(seq,ctx):
     mask = nd.broadcast_axes(nd.greater(trimed_seq,0).reshape((batch_size,-1,1)),axis=2,size=128)
     return aligned_seq,nd.array(trimed_seq,ctx),mask
 def evaluate(data,batch_size):
-    print('lalal')
     test_loss = 0.0
     acc_test = 0.0
     cnt = 0
