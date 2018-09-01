@@ -16,7 +16,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 |Datasets| Accuracy(%)|Best Epoch|
 | :-- | :--: | :--: |
 |Yahoo Answer|73.07(73.7)|2|
-|Amazon Polarity|95.23(95.1)|1|
+|Amazon Polarity|95.24(95.1)|3|
 |Amazon Full|61.58(60.9)|2|
 |Ag news| 92.96(92.8)|6|
 |DBPedia|98.91(98.9)|4|
