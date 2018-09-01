@@ -107,7 +107,7 @@ def batch_iter(data, batch_size, shuffle=True):
         start_index = batch_num * batch_size
         end_index = min((batch_num + 1) * batch_size, data_size)
         yield batch_num * 100.0 / num_batches_per_epoch,shuffled_data[start_index:end_index]
-def accuracy(ouput,label,batch_size):
+def accuracy(output,label,batch_size):
     out = nd.argmax(output,axis=1)
     res = nd.sum(nd.equal(out.reshape((-1,1)),label))/batch_size
     return res
