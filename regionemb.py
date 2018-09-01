@@ -18,7 +18,7 @@ list_vocab_size = [124273,394385,356312,42783,361926,227863]
 list_task = ['yelp_full','amazon_polarity','amazon_full','ag','yahoo','dbpedia']
 emb_size = 128
 region_size = 7
-region_radius = region_size/2
+region_radius = region_size//2
 batch_size = 16
 max_epoch = 20
 learning_rate = 0.0001
@@ -70,19 +70,6 @@ def read_data(path, slot_indexes, slots_lengthes, delim=';', pad=0, type_dict=No
             for index in range(len(raw)):
                 slots[index].append(pad_and_trunc(raw[index],slots_lengthes[index],pad=pad,sequence=slots_lengthes[index]>1))
     return slots
-def batch_iter(data, batch_size, shuffle=True):
-    data = np.array(data)
-    data_size = len(data)
-    num_batches_per_epoch = int((len(data)-1)/batch_size) + 1
-    if shuffle:
-        shuffle_indices = np.random.permutation(np.arange(data_size))
-        shuffled_data = data[shuffle_indices]
-    else:
-        shuffled_data = data
-    for batch_num in range(num_batches_per_epoch):
-        start_index = batch_num * batch_size
-        end_index = min((batch_num + 1) * batch_size, data_size)
-        yield batch_num * 100.0 / num_batches_per_epoch,shuffled_data[start_index:end_index]
 def pad_and_trunc(data, length, pad=0, sequence=False):
     if pad < 0:
         return data
@@ -107,20 +94,35 @@ def load_data(path):
     test_path = base_path+task_path+'test.csv.id'
     labels_test, sequence_test = read_data(test_path, indexes, lengths)
     return list(zip(sequence_test, labels_test)),list(zip(sequence_train, labels_train))
+def batch_iter(data, batch_size, shuffle=True):
+    data = np.array(data)
+    data_size = len(data)
+    num_batches_per_epoch = int((len(data)-1)/batch_size) + 1
+    if shuffle:
+        shuffle_indices = np.random.permutation(np.arange(data_size))
+        shuffled_data = data[shuffle_indices]
+    else:
+        shuffled_data = data
+    for batch_num in range(num_batches_per_epoch):
+        start_index = batch_num * batch_size
+        end_index = min((batch_num + 1) * batch_size, data_size)
+        yield batch_num * 100.0 / num_batches_per_epoch,shuffled_data[start_index:end_index]
 def accuracy(ouput,label,batch_size):
     out = nd.argmax(output,axis=1)
     res = nd.sum(nd.equal(out.reshape((-1,1)),label))/batch_size
     return res
 def batch_process(seq,ctx):
-    batch_sequence = nd.array(seq,ctx)
-    aligned_seq = nd.zeros((max_sequence_length - 2*region_radius,batch_size,region_size),ctx)
+    seq = np.array(seq)
+    aligned_seq = np.zeros((max_sequence_length - 2*region_radius,batch_size,region_size))
     for i in range(region_radius, max_sequence_length - region_radius):
-        aligned_seq[i-region_radius] = nd.slice(batch_sequence, begin=[None, i-region_radius], end=[None, i-region_radius+region_size])
-    batch_sequence = nd.array(batch_sequence,ctx)
+        aligned_seq[i-region_radius] = seq[:,i-region_radius:i-region_radius+region_size]
+    aligned_seq = nd.array(aligned_seq,ctx)
+    batch_sequence = nd.array(seq,ctx)
     trimed_seq = batch_sequence[:, region_radius: max_sequence_length - region_radius]
     mask = nd.broadcast_axes(nd.greater(trimed_seq,0).reshape((batch_size,-1,1)),axis=2,size=128)
-    return aligned_seq,nd.array(trimed_seq,ctx),mask,tot
+    return aligned_seq,nd.array(trimed_seq,ctx),mask
 def evaluate(data,batch_size):
+    print('lalal')
     test_loss = 0.0
     acc_test = 0.0
     cnt = 0
@@ -133,7 +135,7 @@ def evaluate(data,batch_size):
         acc_test += accuracy(output,batch_label,batch_size)
         test_loss += nd.mean(loss)
         cnt = cnt+1
-    return acc_test.asscalar(),test_loss.asscalar()/cnt
+    return acc_test/cnt,test_loss/cnt
 net = Net()
 SCE = mx.gluon.loss.SoftmaxCrossEntropyLoss()
 net.initialize(init.Xavier(), ctx=ctx)
@@ -148,7 +150,7 @@ for epoch in range(max_epoch):
         batch_sequence, batch_label = zip(*batch_slots)
         global_step = global_step + 1
         batch_label = nd.array(batch_label,ctx)
-        aligned_seq,trimed_seq,mask,t = batch_process(batch_sequence,ctx)
+        aligned_seq,trimed_seq,mask = batch_process(batch_sequence,ctx)
         with autograd.record():
             output = net(aligned_seq,trimed_seq,mask)
             loss = SCE(output,batch_label)
@@ -160,7 +162,7 @@ for epoch in range(max_epoch):
             print('%.4f %%'%epoch_percent,'train_loss:',train_loss.asscalar()/print_step,' train_acc:',train_acc.asscalar()/print_step,'time:',time.time()-ctime)
             train_loss,train_acc = 0,0
             ctime = time.time()
-    test_acc,test_loss = evaluate(data_test，batch_size)
+    test_acc,test_loss = evaluate(data_test,batch_size)
     if test_acc>best_acc:
         net.save_parameters('params/regionemb_'+list_task[index])
     print('epoch %d done'%(epoch+1),'acc = %.4f,loss = %.4f'%(test_acc,test_loss))    
