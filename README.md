@@ -13,13 +13,13 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 - Mxnet 1.2.0
 ## 2.Results
 
-To be updated.
-
 |Datasets| Accuracy(%)|Best Epoch|
 | :-- | :--: | :--: |
-|Yahoo Answer| ----|--|
-|Amazon Polarity| ----|--|
-|Amazon Full| ----|--|
-|Ag news| 92.96|6|
-|DBPedia|98.91|4|
-|Yelp Full| 64.98|3|
+|Yahoo Answer|73.07(73.7)|2|
+|Amazon Polarity|95.23(95.1)|1|
+|Amazon Full|61.58(60.9)|2|
+|Ag news| 92.96(92.8)|6|
+|DBPedia|98.91(98.9)|4|
+|Yelp Full| 64.98(64.9)|3|
+
+note: The accuracy in brackets are results reported in the original paper.
