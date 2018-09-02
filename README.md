@@ -26,4 +26,3 @@ To be updated
 
 Note: 
 - The accuracy in brackets are results reported in the original paper.
-- The running time of ContextWord is about half of WordContext.
