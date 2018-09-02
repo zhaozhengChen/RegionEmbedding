@@ -129,5 +129,6 @@ for epoch in range(max_epoch):
             ctime = time.time()
     test_acc,test_loss = evaluate(data_test,batch_size)
     if test_acc>best_acc:
+        best_acc = test_acc
         net.save_parameters('params/regionemb_'+list_task[index])
     print('epoch %d done'%(epoch+1),'acc = %.4f,loss = %.4f'%(test_acc,test_loss))    
