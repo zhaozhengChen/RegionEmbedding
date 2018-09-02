@@ -5,7 +5,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 
 ## 0.Notes
 
-- I just implemented Word-Context Region Embedding in the paper.
+- I implemented both Word-Context and Context-Word Region Embedding in the paper.
 - Please see the original papar about the datasets and pre-pocessing.
 ## 1.Requirements
 
