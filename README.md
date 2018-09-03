@@ -22,7 +22,7 @@ To be updated
 |Amazon Full|61.58(60.9)|2|--(60.8)|--|
 |Ag news| 92.96(92.8)|6|92.89(92.8)|8|
 |DBPedia|98.91(98.9)|4|98.88(98.9)|3|
-|Yelp Full| 64.98(64.9)|3|--(64.5)|--|
+|Yelp Full| 64.98(64.9)|3|64.94(64.5)|2|
 
 Note: 
 - The accuracy in brackets are results reported in the original paper.
