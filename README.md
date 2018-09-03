@@ -18,7 +18,7 @@ To be updated
 
 |Datasets| Accuracy(%)<br>WordContext|Best Epoch<br>WordContext|Accuracy(%)<br>ContextWord|Best Epoch<br>ContextWord|
 | :-- | :--: | :--: | :--: | :--: |
-|Yahoo Answer|73.07(73.7)|2|--(73.4)|--|
+|Yahoo Answer|73.07(73.7)|2|73.42(73.4)|3|
 |Amazon Polarity|95.27(95.1)|2|--(95.3)|--|
 |Amazon Full|61.58(60.9)|2|--(60.8)|--|
 |Ag news| 92.96(92.8)|6|92.89(92.8)|8|
