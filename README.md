@@ -7,6 +7,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 
 - I implemented both Word-Context and Context-Word Region Embedding in the paper.
 - Please see the original papar about the datasets and pre-pocessing.
+- All the hyper-parameters I used are copied from the official implementation.
 ## 1.Requirements
 
 - Python2 or Python3
