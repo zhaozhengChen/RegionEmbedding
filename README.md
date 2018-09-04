@@ -11,7 +11,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 ## 1.Requirements
 
 - Python2 or Python3
-- Mxnet 1.2.0
+- Mxnet 1.2.1
 ## 2.Results
 
 
