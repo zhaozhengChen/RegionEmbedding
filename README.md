@@ -1,5 +1,5 @@
 # RegionEmbedding
-Mxnet implementation of ICLR 2018 paper: [A new method of region embedding for text classification](https://openreview.net/forum?id=BkSDMA36Z).
+MXNet implementation of ICLR 2018 paper: [A new method of region embedding for text classification](https://openreview.net/forum?id=BkSDMA36Z).
 
 Official implementation in [TensorFlow](https://github.com/text-representation/local-context-unit).
 
