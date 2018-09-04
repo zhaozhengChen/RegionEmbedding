@@ -15,7 +15,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 ## 2.Results
 
 
-|Datasets| Accuracy(%)<br>WordContext|Best Epoch<br>WordContext|Accuracy(%)<br>ContextWord|Best Epoch<br>ContextWord|Running Time Per Epoch<br>(mins)
+|Datasets| Accuracy(%)<br>WordContext|Best Epoch<br>WordContext|Accuracy(%)<br>ContextWord|Best Epoch<br>ContextWord|Running Time<br>Per Epoch(mins)
 | :-- | :--: | :--: | :--: | :--: | :--: |
 |Yahoo Answer|73.07(73.7)|2|73.42(73.4)|3|110|
 |Amazon Polarity|95.27(95.1)|2|95.36(95.3)|3|247|
