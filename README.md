@@ -25,7 +25,7 @@ Official implementation in [TensorFlow](https://github.com/text-representation/l
 |Yelp Full| 64.98(64.9)|3|64.94(64.5)|2|25|
 
 Note: 
-- The accuracy and running time in brackets are results reported in the original paper.
+- The accuracy in brackets are results reported in the original paper.
 - The running speed is much faster than the origin implementation in Tensorflow. 
-  <br>The running time was tested on the model of context-word region embedding, which is a little(about 10%) faster than word-context region embedding. 
+  <br>The running time was tested on the model of context-word region embedding, which run roughly the same as the word-context region embedding. 
 - The code run on a Titan Xp GPU.
